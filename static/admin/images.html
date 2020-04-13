@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+{{template "header"}}
+
+<body>
+    <div class="ui container">
+        {{template "navbar"}}
+        <h2 class="ui center aligned header">Images</h2>
+        <div class="ui message">
+            <a href="/admin/addImage"><button class="ui primary button">
+                    Add Image
+                </button></a>
+        </div>
+
+        {{range .}}
+        <div class="ui blue segment">
+            <div class="ui segment">
+                <!-- Button trigger modal -->
+                <button class="ui red button" onclick="setImageToDelete({{.Name}})">
+                    Delete this image
+                </button>
+            </div>
+            <h5 class="ui header">Name: {{.Name}}</h5>
+            <h5 class="ui header">Link: {{.ImageURL}}</h5>
+            <img class="ui small image" src="{{.ImageURL}}">
+        </div>
+        {{end}}
+        <div class="ui black inverted segment">End of Images</div>
+        <br />
+    </div>
+
+    <!-- Modal -->
+    <div class="ui basic modal">
+        <div class="ui icon header">
+            <i class="delete icon"></i>
+            Delete This Image?
+        </div>
+        <div class="content">
+            <p>Do you want to delete this image completely?</p>
+        </div>
+        <div class="actions">
+            <div class="ui basic cancel inverted button">
+                <i class="remove icon"></i>
+                No
+            </div>
+            <div onclick="location.href='/admin/deleteImage/' + getImageNameToDelete()"
+                class="ui red ok inverted button">
+                <i class="checkmark icon"></i>
+                Yes
+            </div>
+        </div>
+    </div>
+</body>
+{{template "footer"}}
+
+</html>

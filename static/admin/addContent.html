@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+{{template "header"}}
+<script>
+// window.onbeforeunload = function(){   
+//     return 'Are you sure you want to leave?';
+// };
+</script>
+<body onbeforeunload="return leavePage()">
+    <div class="ui container">
+        {{template "navbar"}}
+        <h2 class="ui center aligned header">Add Page</h2>
+
+        <div class="ui grid">
+            <!-- <div class="ui horizontal segments"> -->
+            <div class="eleven wide column">
+                <div class="ui segment">
+                    <h3 class="ui center aligned header">Page</h3>
+                    <div class="ui segment">
+                        <form class="ui form" method="post" action="/admin/newContent">                            
+                            <textarea id="content-area" name="content" required> Some Text</textarea>
+                            <br>
+                            <div class="field">
+                                <label>Name</label>
+                                <input name="name" type="text" placeholder="Name" value="" required>
+                            </div>
+                            <br>
+                            <div class="field">
+                                <label>Published</label>
+                                <input name="visible" type="checkbox">
+                                </span>
+                            </div>
+                            <br>
+                            <div class="field">
+                                <label>Title</label>
+                                <input name="title" type="text" placeholder="Title" value="" required>
+                            </div>
+                            <br>
+                            <div class="field">
+                                <label>Subject</label>
+                                <input name="subject" type="text" placeholder="Subject" value="" required>
+                            </div>
+                            <br>
+                            <div class="field">
+                                <label>Author</label>
+                                <input name="author" type="text" placeholder="Author" value="">
+                            </div>
+                            <br>
+                            <div class="field">
+                                <label>Key Words</label>
+                                <input name="metaKeyWords" type="text"
+                                    placeholder="Meta Key Words. Example: books, music" value="">
+                            </div>
+                            <br>
+                            <div class="field">
+                                <label>Description</label>
+                                <textarea name="desc" rows="3" placeholder="Description"></textarea>
+                            </div>
+                            <br>
+                            <div class="field">
+                                <label>Blog Post</label>
+                                <input name="blogpost" type="checkbox">
+                                </span>
+                            </div>
+                            <br>
+                            <div class="field">
+                                <label>Archived</label>
+                                <input name="archived" type="checkbox">
+                                </span>
+                            </div>
+                            <br>
+                            <!-- <div class="form-submit"> -->
+                            <button onclick="savePage();" class="ui primary button" type="submit">Submit</button>
+                            <!-- </div> -->
+                            <br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="five wide column">
+                <div class="ui segment">
+                    <h3 class="ui center aligned header">Images</h3>
+                    <!-- <div class="ui segment"> -->
+                    <!-- <div class="image-wrapper"> -->
+                    {{range .}}
+                    <div class="ui segment">
+                        <!-- <div class="card"> -->
+                        <h5 class="ui header">Name: {{.Name}}</h5>
+                        <h5 class="ui header">Link: {{.ImageURL}}</h5>
+                        <!-- <div class="ui segment">Name: {{.Name}}</div>
+                            <div class="ui segment">Link: {{.ImageURL}}</div> -->
+                        <img class="ui small image" src="{{.ImageURL}}">
+                        <!-- <div class="ui segment">
+                                    <div class="image-view">
+                                        <img id="img1" src="{{.ImageURL}}" />
+                                    </div>
+                                </div> -->
+                        <!-- </div> -->
+                    </div>
+                    {{end}}
+                    <!-- </div> -->
+                    <!-- </div> -->
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
+    </div>
+    <br>
+</body>
+{{template "footer"}}
+
+</html>

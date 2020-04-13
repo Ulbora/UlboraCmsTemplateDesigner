@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+{{template "header"}}
+
+<body>
+    <div class="ui container">
+        {{template "navbar"}}
+        <h2 class="ui center aligned header">Template List</h2>
+        <a  href="/admin/addTemplate"><button class="ui primary button">
+            Add Template
+        </button></a>
+        
+        <table class="ui selectable celled table">
+            <thead>
+                <tr>
+                    <th>Template</th>
+                    <th>Name</th>
+                    <th>Activate</th>
+                    <th>Remove</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {{range .}}
+                <tr>
+                    <td>
+                        <img class="ui medium image" src="{{.ScreenShot}}">
+                    </td>
+                    <td>{{.Name}}</td>
+                    {{if .Active}}
+                    <td class="positive">Active</td>
+                    {{else}}
+                    <td>
+                        <!-- <a href="/admin/templateActive/{{.Name}}" class="btn btn-primary active" role="button" aria-pressed="true">Make Active</a> -->
+                        <a  href="/admin/templateActive/{{.Name}}"><button class="ui green button">
+                            Make Active
+                        </button></a>
+                    </td>
+                    {{end}} 
+                    
+                    {{if .Active}}
+                    <td class="warning">Not Allowed</td>
+                    {{else}}
+                    <td>
+                    <button  onclick="setTemplateToDelete({{.Name}})" class="ui red button">
+                        Delete                                      
+                      </button> 
+                      {{end}}
+                    </td>
+                </tr>
+
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="ui basic modal">
+        <div class="ui icon header">
+            <i class="delete icon"></i>
+            Delete This Template?
+        </div>
+        <div class="content">
+            <p>Do you want to delete this template completely?</p>
+        </div>
+        <div class="actions">
+            <div class="ui basic cancel inverted button">
+                <i class="remove icon"></i>
+                No
+            </div>
+            <div onclick="location.href='/admin/deleteTemplate/' + getTemplateNameToDelete()"
+                class="ui red ok inverted button">
+                <i class="checkmark icon"></i>
+                Yes
+            </div>
+        </div>
+    </div>    
+</body>
+{{template "footer"}}
+
+</html>
